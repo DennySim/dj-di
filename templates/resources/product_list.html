@@ -1,0 +1,62 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container mb-5">
+        <br>
+        <h1>{{ sub_category }}</h1>
+        <br>
+        <div class="row">
+
+            {% for product in product_list %}
+                <div class="col-md-4">
+                    <h2>{{ product.name }}</h2>
+                    <a href="./product_view.html?id={{ product.id }}">
+                        <img src="{{ product.img.url }}" width="180">
+                    </a>
+                    {% include "./add_button.html" %}
+
+                </div>
+            {% endfor %}
+
+            {% for product in products %}
+                <div class="col-md-4">
+                    <h2>{{ product.name }}</h2>
+                    <a href="./product_view.html?id={{ product.id }}">
+                        <img src="{{ product.img.url }}" width="180">
+                    </a>
+                    {% include "./add_button.html" %}
+
+                </div>
+            {% endfor %}
+
+        </div>
+        <br>
+        <!-- Альтернативная пагинация-->
+        {#          {% if products.has_previous %}<a href="?sub_category={{ sub_category }}&page={{ products.previous_page_number }}"> ← </a>{% endif %}#}
+        {#            <a class="button disabled" href="">{{ products.number }}</a>#}
+        {#          {% if products.has_next %}<a href="?sub_category={{ sub_category }}&page={{ products.next_page_number }}">→</a>{% endif %}#}
+
+        <span style="font-size: xx-large">
+          {% if is_paginated %}
+              <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li><a href="?sub_category={{ sub_category }}&page={{ page_obj.previous_page_number }}">←</a></li>
+            {% else %}
+                <li class="disabled">←</li>
+            {% endif %}
+                  <a class="button disabled" href="">{{ page_obj.number }}</a>
+                  {% if page_obj.has_next %}
+                      <li><a href="?sub_category={{ sub_category }}&page={{ page_obj.next_page_number }}">→</a></li>
+                  {% else %}
+                      <li class="disabled">→</li>
+                  {% endif %}
+          </ul>
+          {% endif %}
+        </span>
+
+    </div> <!-- /container -->
+
+{% endblock %}
+

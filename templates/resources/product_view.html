@@ -1,0 +1,50 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'product_view.css' %}">
+
+    <main role="main">
+
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ product.name }}</h2>
+                    <img src="{{ product.img.url }}" width="180">
+
+                    <p>{{ product.description }}</p>
+
+                    {% include "./add_button.html" %}
+                </div>
+            </div>
+            <hr>
+
+
+            {% for review in product.reviews.all|dictsortreversed:"date_time" %}
+                <repeat n='{{ review.mark }}'></repeat>
+                <span>{{ review.name }}</span>
+                <p>{{ review.text }}</p>
+
+            {% endfor %}
+            <hr>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-8 col-sm-12">
+                    <h4>Оставьте отзыв:</h4>
+
+                    <form action='product_view.html?id={{ product.id }}' method="POST">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input type="hidden" name="product" value="{{ product.id }}">
+
+                        <hr>
+                        <button type="submit" class="btn btn-primary">Оставить</button>
+                    </form>
+                </div>
+            </div>
+
+        </div> <!-- /container -->
+    </main>
+
+{% endblock %}

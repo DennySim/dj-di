@@ -1,0 +1,33 @@
+body {
+  padding-top: 3.5rem;
+}
+
+/*label {*/
+  /*display: block;*/
+/*}*/
+
+
+repeat {
+    display:block;
+}
+
+repeat[n="1"]:before {
+   content: "★";
+}
+
+repeat[n="2"]:before {
+   content: "★★";
+}
+
+repeat[n="3"]:before {
+   content: "★★★";
+}
+
+repeat[n="4"]:before {
+   content: "★★★★";
+}
+
+repeat[n="5"]:before {
+   content: "★★★★★";
+}
+

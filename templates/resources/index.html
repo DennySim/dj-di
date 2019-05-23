@@ -1,0 +1,38 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block content %}
+    <main role="main">
+
+        {% for article in articles|dictsortreversed:"pub_date" %}
+
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4">{{ article.title }}</h1>
+                    <p>{{ article.text }}</p>
+                </div>
+            </div>
+
+            <div class="container mb-5">
+                <div class="row">
+
+                    {% for product in article.products.all %}
+                        <div class="col-md-4">
+                            <h2>{{ product.name }}</h2>
+                            <a href="./product_view.html?id={{ product.id }}">
+                                <img src="{{ product.img.url }}" width="180">
+                            </a>
+                            {% include "./add_button.html" %}
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <hr>
+                <p style="color: green">Опубликовано {{ article.pub_date }}</p>
+            </div> <!-- /container -->
+
+
+        {% endfor %}
+
+    </main>
+{% endblock %}

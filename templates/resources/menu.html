@@ -1,0 +1,65 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="/index.html">Просто магазин</a>
+    <img src="{% static 'logo.svg' %}" alt="" width="42" height="42">
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">
+                    Главная</a>
+            </li>
+
+            {% for cat in cats %}
+
+                <li class="nav-item dropdown">
+                    {% if cat.sub_cat.all|length != 0 %}
+                        <a class="nav-link dropdown-toggle" href="#" id="{{ cat.name }}"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ cat.name }}
+                        </a>
+                    {% else %}
+                        <a class="nav-link dropdown-toggle" href="/empty_section.html">
+                            {{ cat.name }}
+                        </a>
+                    {% endif %}
+
+                    <div class="dropdown-menu" aria-labelledby="{{ cat.name }}">
+
+                        {% for sub in cat.sub_cat.all %}
+                            <a class="dropdown-item" href="/product_list.html?sub_category={{ sub.name }}"
+                               id="{{ sub.name }}">
+                                {{ sub.name }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </li>
+            {% endfor %}
+
+
+        </ul>
+        <a class="btn btn-outline-success my-2 my-sm-0" role="button"
+           href="/cart.html">
+            Корзина</a>
+
+        {% if not user.is_authenticated %}
+            <a class="btn btn-outline-success my-2 my-sm-0" role="button"
+               href="/login.html">
+                Войти</a>
+            <a class="btn btn-outline-success my-2 my-sm-0" role="button"
+               href="/signup">
+                Зарегистрироваться</a>
+        {% else %}
+            <a class="btn btn-outline-success my-2 my-sm-0" role="button"
+               href="{% url 'logout_action' %}">
+                {{ user.email }}, Выйти</a>
+        {% endif %}
+
+    </div>
+</nav>

@@ -1,0 +1,40 @@
+{% extends 'admin/change_list.html' %}
+{% block content_title %}
+    <h1> Список ТОП 3 лучших клиентов </h1>
+{% endblock %}
+{% block result_list %}
+
+    <div class='results'>
+        <table>
+            <thead>
+            <tr>
+                <th>
+                    <div class='text'>
+                        <a href='#'>Клиент</a>
+                    </div>
+                </th>
+                <th>
+                    <div class='text'>
+                        <a href='#'>Количество заказов</a>
+                    </div>
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {% for row in summary %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td> {{ row.customer__email }} </td>
+                    <td> {{ row.total_orders }} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+{% endblock %}
+
+{% block pagination %}
+{% endblock %}
