@@ -74,6 +74,7 @@ class OrderCountByCustomerAdmin(admin.ModelAdmin):
 
 class CustomUserAdmin(admin.ModelAdmin):
     model = User
+    fields = ('email', 'password')
 
 
 admin.site.register(User, CustomUserAdmin)

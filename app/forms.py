@@ -8,7 +8,7 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ('name', 'text', 'mark', 'product')
+        fields = ('author', 'text', 'mark', 'product')
 
 
 class ReviewFormset(ReviewForm):
@@ -19,12 +19,12 @@ class ReviewFormset(ReviewForm):
 
     class Meta:
         model = Review
-        fields = ('name', 'text', 'mark',)
+        fields = ('author', 'text', 'mark',)
         widgets = {
             'mark': forms.RadioSelect,
             'product': forms.HiddenInput
         }
-        labels = {'name': 'Имя', 'text': 'Содержание', 'mark': ''}
+        labels = {'author': 'Имя', 'text': 'Содержание', 'mark': ''}
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -37,8 +37,8 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
-        self.fields['password1'].label = "Пароль"
-        self.fields['password2'].label = "Подтверждение пароля"
+        # self.fields['password1'].label = "Пароль"
+        # self.fields['password2'].label = "Подтверждение пароля"
 
     class Meta:
         model = User

@@ -2,8 +2,10 @@
 {% load static %}
 {% block content %}
 
+<link rel="stylesheet" href="{% static 'login.css' %}">
+
     <div class="text-center" data-gr-c-s-loaded="true">
-        <link rel="stylesheet" href="./static/login.css">
+
 
         <form class="form-signin">
             {% csrf_token %}

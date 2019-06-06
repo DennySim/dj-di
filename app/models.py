@@ -60,6 +60,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.email
 
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True,
@@ -108,7 +112,7 @@ class Product(models.Model):
 class Review(models.Model):
     date_time = models.DateTimeField(auto_now_add=True)
     text = models.TextField()
-    name = models.CharField(max_length=30, default=None)
+    author = models.CharField(max_length=30, default=None, verbose_name='Автор')
     mark = models.IntegerField(default=1, choices=[(i,i) for i in range(1,6)])
     product = models.ForeignKey(Product, on_delete=models.CASCADE, default=None,
                                 related_name='reviews')
@@ -123,6 +127,7 @@ class Review(models.Model):
 
 class Article(models.Model):
 
+    author = models.CharField(max_length=30, default=None, verbose_name='Автор')
     title = models.CharField(max_length=100, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Содержание')
     pub_date = models.DateField(auto_now_add=True)
@@ -160,6 +165,7 @@ class OrderCountByCustomer(Order):
         proxy = True
         verbose_name = 'Список ТОП 3 лучших клиентов'
         verbose_name_plural = 'Список ТОП 3 лучших клиентов'
+
 
 
 

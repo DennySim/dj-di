@@ -23,7 +23,7 @@
 
             {% for review in product.reviews.all|dictsortreversed:"date_time" %}
                 <repeat n='{{ review.mark }}'></repeat>
-                <span>{{ review.name }}</span>
+                <span>{{ review.author }}</span>
                 <p>{{ review.text }}</p>
 
             {% endfor %}

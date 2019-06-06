@@ -10,6 +10,7 @@ from django.conf import settings
 from .models import Category, SubCategory, Article, Product, User, Order
 from .forms import ReviewForm, ReviewFormset
 
+
 # Предоставление контекста для меню
 def base_view(context):
     context['cats'] = Category.objects.all()
